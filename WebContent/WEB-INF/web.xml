@@ -41,6 +41,28 @@
   </error-page> -->
   
   
+  <!-- 
+  	세션 유지시간 설정하기
+  		: web.xml에서는 '분' 단위로 설정한다.
+   -->
+	<!-- <session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>   -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   <!-- 
   		웹 애플리케이션 자체를 실행했을때 제일 먼저 실행될

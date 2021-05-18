@@ -105,7 +105,6 @@ if(boardLists.isEmpty()){
 <% 		
 	}
 }
-
 %>
 	</table>
 	<table border="1" width="90%">
@@ -115,10 +114,7 @@ if(boardLists.isEmpty()){
 				글쓰기</button>
 			</td>
 		</tr>
-	
 	</table>
-	
-	
 	
 </body>
 </html>

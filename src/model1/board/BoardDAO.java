@@ -171,19 +171,25 @@ public class BoardDAO {
 	}
 	
 
+	// 게시판 글쓰기 처리
 	public int insertWrite(BoardDTO dto) {
 		int result = 0;
 		try {
+			// 인파라미터가 있는 insert 쿼리문 작성
 			String query = " INSERT INTO board( "
 				 +  " num, title, content, id, visitcount) "
 				 + " VALUES ( "
 				 + " seq_board_num.NEXTVAL, ?, ?, ?, 0 ) ";
 			
+			// prepare객체 생성 후 인파라미터 설정
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, dto.getTitle());
 			psmt.setString(2, dto.getContent());
 			psmt.setString(3, dto.getId());
+			
+			// 쿼리문 실행
 			result = psmt.executeUpdate();
+		
 		}catch (Exception e) {
 			System.out.println("게시물 입력 중 에외 발생");
 			e.printStackTrace();
@@ -193,6 +199,112 @@ public class BoardDAO {
 		
 	}
 	
+	
+	// 게시물 조회하기(내용보기, 상세보기)
+	public BoardDTO selecrView(String num) {
+		
+		// 조회한 하나의 레코드를 저장할 DTO객체 생성
+		BoardDTO dto = new BoardDTO();
+		
+		/* 
+		회원의 이름을 가져오기 위해
+		회원테이블과 게시판 테이블을 조인하여 조회함
+		*/
+		String query = " SELECT B.*, M.name "
+				+ " FROM member M INNER JOIN board B "
+				+ " ON M.id = B.id "
+				+ " WHERE num=? ";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, num);
+			rs = psmt.executeQuery();
+			/*
+			매개변수로 전달된 일련번호를 통해 조회하므로
+			결과는 무조건 1개만 나오게 된다. 따라서 if문으로
+			반환된 결과가 있는지만 확인하면 된다.
+			 */
+
+			
+			if(rs.next()) {
+				dto.setNum(rs.getString("num"));
+				dto.setTitle(rs.getString("title"));
+				dto.setContent(rs.getString("content"));
+				dto.setPostdate(rs.getDate("postdate"));
+				dto.setId(rs.getString("id"));
+				dto.setVisitcount(rs.getString("visitcount"));
+				dto.setName(rs.getString("name"));
+				
+			}
+			
+		} catch (Exception e) {
+			System.out.println("게시물 상세보기 중 예외발생");
+			e.printStackTrace();
+		}
+		return dto;
+		
+	}
+	
+	// 조회수 증가
+	public void updateVisitCount(String num) {		
+		String query = " update board "
+		+ " set visitcount = visitcount +1 "
+		+ " where num=? " ;
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, num);
+			rs = psmt.executeQuery();
+		} catch (Exception e) {
+			System.out.println("게시물 조회수 증가 중 예외발생");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	// 게시물 수정 처리
+	public int updateEdit(BoardDTO dto) {
+		int result = 0;
+		try {
+			
+			String query = " UPDATE	board "
+					+ " SET title=?, content=? "
+					+ " WHERE num=? ";
+		
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getNum());
+			
+			result = psmt.executeUpdate();
+		
+		}catch (Exception e) {
+			System.out.println("게시물 수정 중 에외 발생");
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	public int deletePost(BoardDTO dto) {
+		int result = 0;
+		try {
+			
+			String query = " DELETE FROM board "
+					+ " WHERE num=? ";
+		
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getNum());
+			result = psmt.executeUpdate();
+		
+		}catch (Exception e) {
+			System.out.println("게시물 삭제 중 에외 발생");
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+	}
 	
 	
 	

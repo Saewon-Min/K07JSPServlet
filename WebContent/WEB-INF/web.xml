@@ -21,6 +21,15 @@
   	<param-name>ConnectionURL</param-name>
   	<param-value>jdbc:oracle:thin:@localhost:1521:xe</param-value>
   </context-param>
+  <context-param>
+  	<param-name>OracleId</param-name>
+  	<param-value>kosmo</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>OraclePwd</param-name>
+  	<param-value>1234</param-value>
+  </context-param>
+  
   
   <!-- 
   		에러가 발생 했을 때 특정 페이지에서 예외처리를 하기 위한 설정.

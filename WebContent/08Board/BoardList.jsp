@@ -1,13 +1,10 @@
-<%@page import="model.BoardDAO"%>
+<%@page import="model1.board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <% 
-String drv = application.getInitParameter("JDBCDriver");
-String url = application.getInitParameter("ConnectionURL");
-BoardDAO dao = new BoardDAO(drv,url);
-
-
+// jsp에서 java로 application내장 객체를 전달해준다.
+BoardDAO dao = new BoardDAO(application);
 %>
 <!DOCTYPE html>
 <html>
@@ -16,6 +13,6 @@ BoardDAO dao = new BoardDAO(drv,url);
 <title>Insert title here</title>
 </head>
 <body>
-
+	
 </body>
 </html>

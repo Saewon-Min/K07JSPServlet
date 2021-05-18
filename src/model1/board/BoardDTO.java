@@ -1,4 +1,4 @@
-package model;
+package model1.board;
 
 public class BoardDTO {
 
@@ -7,8 +7,11 @@ public class BoardDTO {
     private String title; 
     private String content ;
     private String id ;
-    private String postdate;
+    private java.sql.Date postdate;
     private String visitcount;
+    // member테이블과 조인 후 회원 이름을 출력해야 할때 사용
+    private String name;
+    
     
     // 생성자 : 필요한 경우에만 생성한다.
     // 여기서는 생성안함
@@ -54,13 +57,23 @@ public class BoardDTO {
 	}
 
 
-	public String getPostdate() {
+	public java.sql.Date getPostdate() {
 		return postdate;
 	}
 
 
-	public void setPostdate(String postdate) {
+	public void setPostdate(java.sql.Date postdate) {
 		this.postdate = postdate;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 

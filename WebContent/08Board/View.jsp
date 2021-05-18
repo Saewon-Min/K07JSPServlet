@@ -61,7 +61,7 @@ function isDelete() {
 		<tr>
 			<td>내용</td>
 			<td colspan="3" height="100">
-				<%= dto.getContent().replace("\r\n","<br/>") %></td>
+				<%= dto.getContent().replace("\r\n","<br>") %></td>
 				
 			<!-- 
 				<textarea> 에서 줄바꿈을 위해 Enter키를 누르면

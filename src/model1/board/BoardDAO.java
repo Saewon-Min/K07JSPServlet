@@ -191,7 +191,7 @@ public class BoardDAO {
 			result = psmt.executeUpdate();
 		
 		}catch (Exception e) {
-			System.out.println("게시물 입력 중 에외 발생");
+			System.out.println("게시물 입력 중 예외 발생");
 			e.printStackTrace();
 		}
 		

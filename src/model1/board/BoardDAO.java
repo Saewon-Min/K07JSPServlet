@@ -110,8 +110,67 @@ public class BoardDAO {
 	}
 	
 	
+	// 게시판 목록 출력시 페이지 처리
+	public List<BoardDTO> selectListPage(Map<String, Object> map){
+		List<BoardDTO> bbs = new Vector<BoardDTO>();
+		/*
+		목록의 페이지 처리를 위해 레코드의 구간을 between으로 정해 조회함
+		
+		1번 : board테이블의 게시물을 일련번호의 내림차순으로 정렬
+		2번 : 1번의 결과에 rownum(순차적인 가상번호)를 부여함
+		3번 : 2번의 결과를 between으로 구간을 정해 조회함
+		
+		※ 만약 게시판이 아닌 다른 테이블을 조회하고 싶다면 1번 쿼리문에서
+			테이블명만 변경하면 된다.
+		 */
+		String query = " " +
+				" select * " + 
+				" from (select Tb.* , rownum rNum " + 
+				" 		from (select * " +
+				"			 from board ";
+		
+		if(map.get("searchWord")!=null) {
+			query += " where " + map.get("searchField") + " "
+					+ " like '%" + map.get("searchWord") + "%' ";
+		}
+		query += " "+
+				" order by num desc)   Tb) " +  
+				" where rNum between ? and ? "; 
+		System.out.println("페이지 쿼리 : "+query);
+		try {
+			
+			psmt = con.prepareStatement(query);
+			// between절의 start와 end값을 인파라미터 설정
+			psmt.setString(1, map.get("start").toString());
+			psmt.setString(2, map.get("end").toString());
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				BoardDTO dto = new BoardDTO();
+				
+				dto.setNum(rs.getString("num"));
+				dto.setTitle(rs.getString("title"));
+				dto.setContent(rs.getString("content"));
+				dto.setPostdate(rs.getDate("postdate"));
+				dto.setId(rs.getString("id"));
+				dto.setVisitcount(rs.getString("visitcount"));
+				
+				bbs.add(dto);
+				
+			}
+		} catch (Exception e) {
+			System.out.println("게시물 조회중 예외발생");
+			e.printStackTrace();
+			
+		}	
+		return bbs;
+	
+	}
+	
+	
+	
+	
 	/*
-	목록에 출력할 게시물을 조회하기 위한 메소드
+	목록에 출력할 게시물을 조회하기 위한 메소드(Page 처리 없음)
 	 */
 	public List<BoardDTO> selectList(Map<String, Object> map){
 		/*
@@ -169,7 +228,6 @@ public class BoardDAO {
 		
 		return bbs;
 	}
-	
 
 	// 게시판 글쓰기 처리
 	public int insertWrite(BoardDTO dto) {
@@ -201,7 +259,7 @@ public class BoardDAO {
 	
 	
 	// 게시물 조회하기(내용보기, 상세보기)
-	public BoardDTO selecrView(String num) {
+	public BoardDTO selectView(String num) {
 		
 		// 조회한 하나의 레코드를 저장할 DTO객체 생성
 		BoardDTO dto = new BoardDTO();
@@ -285,7 +343,7 @@ public class BoardDAO {
 		return result;
 	}
 	
-	
+	// 게시물 삭제 처리
 	public int deletePost(BoardDTO dto) {
 		int result = 0;
 		try {

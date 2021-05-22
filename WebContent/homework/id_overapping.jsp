@@ -14,7 +14,7 @@ function idUse(){
 	사용자는 수정할 수 없게되지만
 	JS에서는 값을 수정할 수 있다. 
 	*/
-	opener.document.loginFrm.id.value = 
+	opener.document.loginFrm.user_id.value = 
 			document.overlapFrm.retype_id.value;
 	self.close();
 }

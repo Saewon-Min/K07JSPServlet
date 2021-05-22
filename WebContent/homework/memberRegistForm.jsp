@@ -120,7 +120,7 @@
         if(fn.name.value==""){
             alert("이름을 입력해주세요");fn.name.focus();return false;
         } 
-        return false;
+        return true;
     }
     function isPassword(param){
         //숫자나 특수기호가 확인되면 true로 변경한다.
@@ -243,14 +243,14 @@
             }
         }).open();
     }
-	//onsubmit="return loginValdidate(this)"
+	
     </script>
 </head>
 
 <body>
 
 
-<form action="memberWriteProcess.jsp" method="post" name="loginFrm" >
+<form action="memberWriteProcess.jsp" method="post" name="loginFrm" onsubmit="return loginValdidate(this);">
 <div class="AllWrap">
     <div class="wrap_regiform">
         <p>*필수입력사항</p>
@@ -379,7 +379,7 @@
             </tr>
         </table>
         <div style="text-align: center; margin-top:10px;">
-            <input type="submit" value="회원가입하기" onclick="loginValdidate(this.form);">
+            <input type="submit" value="회원가입하기">
             <input type="reset" value="작성내용리셋">
             <input type="button" value="메인으로" onclick="location.href='memberList.jsp';" />
         </div>

@@ -7,6 +7,7 @@ public class MembershipDTO {
     private String name ;
     private String gender ;
     private String birth ;
+    private String zipcode;
     private String address ;
     private String email ;    
     private String phone ;    
@@ -43,6 +44,13 @@ public class MembershipDTO {
 	}
 	public void setBirth(String birth) {
 		this.birth = birth;
+	}
+	
+	public String getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
 	}
 	public String getAddress() {
 		return address;

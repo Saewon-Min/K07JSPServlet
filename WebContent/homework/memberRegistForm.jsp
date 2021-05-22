@@ -6,41 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<% 
-MembershipDAO dao = new MembershipDAO(application);
 
-
-Map<String, Object> param = new HashMap<String, Object>();
-
-//검색에 대한 파라미터를 받아서 변수에 저장
-String userId = request.getParameter("user_id"); 
-String userPass = request.getParameter("pass1"); 
-String name = request.getParameter("name"); 
-String gender = request.getParameter("gender");
-String birthday = request.getParameter("birthday"); 
-String zipcode = request.getParameter("zipcode"); 
-String address1 = request.getParameter("address1"); 
-String address2 = request.getParameter("address2"); 
-String email1 = request.getParameter("email1"); 
-String email2 = request.getParameter("email2"); 
-String mobile1 = request.getParameter("mobile1"); 
-String mobile2 = request.getParameter("mobile2"); 
-String mobile3 = request.getParameter("mobile3"); 
-String tel1 = request.getParameter("tel1"); 
-String tel2 = request.getParameter("tel2"); 
-String tel3 = request.getParameter("tel3"); 
-
-MembershipDTO dto = new MembershipDTO();
-
-dto.setId(userId);
-
-
-
-//List<MembershipDTO> memberLists = dao.selectListPage(param);
-
-
-dao.close();
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,6 +49,7 @@ dao.close();
    
     
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="shortcut icon" href="#">
     <!--  <link rel="stylesheet" href="/resources/demos/style.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -107,6 +74,8 @@ dao.close();
         idObj = document.loginFrm.user_id;//아이디 객체
     }
 	function idCheck(fn){
+		
+		
 		if(!idCapsule()){
             idObj.value="";
             idObj.focus();
@@ -115,14 +84,14 @@ dao.close();
         if(fn.user_id.value==""){
             alert("아이디를 입력후 중복확인을 해주세요.");
             fn.user_id.focus();		
-        }	
+        }
         else{
             fn.user_id.readOnly = true;
             window.open("./id_overapping.jsp?id="+fn.user_id.value,
                     "idover", "width=500,height=300");
         }
     }
-    function loginValdidate(fn){        
+    function loginValdidate(fn){           
         //일반적인방법
         if(fn.user_id.value==""){
             alert("아이디를 입력해주세요");
@@ -274,11 +243,14 @@ dao.close();
             }
         }).open();
     }
+	//onsubmit="return loginValdidate(this)"
     </script>
 </head>
 
 <body>
-<form action="" method="post" name="loginFrm" onsubmit="return loginValdidate(this)">
+
+
+<form action="memberWriteProcess.jsp" method="post" name="loginFrm" >
 <div class="AllWrap">
     <div class="wrap_regiform">
         <p>*필수입력사항</p>
@@ -290,7 +262,8 @@ dao.close();
             <tr>
                 <td><span class="red">*</span> 아이디</td>
                 <td>
-                    <input type="text" class="w01" name="user_id" value="" />       
+                    <input type="text" class="w01" name="user_id" value="" />  
+                                        		
                     <button type="button" onclick="idCheck(this.form);">중복확인</button>             
                 </td>
             </tr>
@@ -406,8 +379,9 @@ dao.close();
             </tr>
         </table>
         <div style="text-align: center; margin-top:10px;">
-            <input type="submit" value="회원가입하기">
+            <input type="submit" value="회원가입하기" onclick="loginValdidate(this.form);">
             <input type="reset" value="작성내용리셋">
+            <input type="button" value="메인으로" onclick="location.href='memberList.jsp';" />
         </div>
     </div>
 </div>

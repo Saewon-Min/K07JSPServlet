@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
@@ -71,6 +72,9 @@ public class MembershipDAO {
 			// 쿼리문 실행
 			result = psmt.executeUpdate();
 		
+		}catch (SQLIntegrityConstraintViolationException e) {
+			System.out.println("중복된 아이디가 존재합니다");
+			return result=-1;
 		}catch (Exception e) {
 			System.out.println("게시물 입력 중 예외 발생");
 			e.printStackTrace();

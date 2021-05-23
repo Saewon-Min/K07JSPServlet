@@ -55,6 +55,8 @@ request.setCharacterEncoding("UTF-8");
 	
 	if(iResult==1){
 		response.sendRedirect("memberRegistForm.jsp");
+	}else if(iResult==-1){
+		JSFunction.alertBack("중복된 아이디가 존재합니다.", out);
 	}else{
 		JSFunction.alertBack("글쓰기에 실패하였습니다.", out);
 	}
@@ -68,6 +70,6 @@ request.setCharacterEncoding("UTF-8");
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>회원가입이 완료되었습니다.</h2>
+	
 </body>
 </html>

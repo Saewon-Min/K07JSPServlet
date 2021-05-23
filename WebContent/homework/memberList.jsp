@@ -65,7 +65,6 @@ System.out.println(start+" = "+end);
 // 목록에 실제 출력할 레코드를 얻어오기 위한 메소드 호출
 List<MembershipDTO> boardLists = dao.memberList(param);  
 
-session.setAttribute("userid", boardLists.get(1));
 
 // 자원해제(반납)
 dao.close();

@@ -70,7 +70,7 @@ if(favo != null){
 }
 
 /*
-textarea를 통해 입력받은 값은 엔터키에 포함되어 있으므로
+textarea를 통해 입력받은 값은 엔터키가 포함되어 있으므로
 출력시에는 특수기호를 <br/>로 변환 후 출력해야한다.
 */
 String self_intro = request.getParameter("self_intro").replace("\r\n","<br/>");

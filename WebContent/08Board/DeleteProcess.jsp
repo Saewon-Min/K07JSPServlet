@@ -9,7 +9,7 @@ String num = request.getParameter("num");
 BoardDTO dto = new BoardDTO();
 BoardDAO dao = new BoardDAO(application);
 // 기존 게시물 조회
-dto = dao.selecrView(num);
+dto = dao.selectView(num);
 // session영역에 저장된 회원 인증정보 얻어옴
 String session_id = session.getAttribute("USER_ID").toString();
 int delResult = 0;

@@ -9,7 +9,7 @@ BoardDAO dao = new BoardDAO(application);
 
 dao.updateVisitCount(num);
 
-BoardDTO dto = dao.selecrView(num);
+BoardDTO dto = dao.selectView(num);
 dao.close();
 
 

@@ -11,7 +11,7 @@ String num = request.getParameter("num");
 
 // DAO 객체 생성 후 게시물 조회
 BoardDAO dao = new BoardDAO(application);
-BoardDTO dto = dao.selecrView(num);
+BoardDTO dto = dao.selectView(num);
 
 // 작성자 본인만 수정하기 페이지에 접근할 수 있다.
 /*

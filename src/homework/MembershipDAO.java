@@ -76,7 +76,7 @@ public class MembershipDAO {
 			System.out.println("중복된 아이디가 존재합니다");
 			return result=-1;
 		}catch (Exception e) {
-			System.out.println("게시물 입력 중 예외 발생");
+			System.out.println("회원정보 입력 중 예외 발생");
 			e.printStackTrace();
 		}
 		
@@ -132,7 +132,7 @@ public class MembershipDAO {
 					
 				}
 			} catch (Exception e) {
-				System.out.println("게시물 조회중 예외발생");
+				System.out.println("회원 전체 목록 조회중 예외발생");
 				e.printStackTrace();
 				
 			}	
@@ -184,7 +184,7 @@ public class MembershipDAO {
 			}
 			
 		} catch (Exception e) {
-			System.out.println("게시물 상세보기 중 예외발생");
+			System.out.println("회원 상세정보 보기 중 예외발생");
 			e.printStackTrace();
 		}
 		return dto;
@@ -217,7 +217,7 @@ public class MembershipDAO {
 			// count(*)을 통한 쿼리의 결과는 무조건 정수이므로 getInt()로 읽어옴
 			totalCount = rs.getInt(1); // 결과의 개수는 무조건 1개이므로 while문 없이 한번만 출력한다.
 		} catch (Exception e) {
-			System.out.println("게시물 카운트 중 예외발생");
+			System.out.println("회원수 카운트 중 예외발생");
 			e.printStackTrace();
 		}
 		

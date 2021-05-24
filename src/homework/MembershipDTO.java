@@ -1,5 +1,7 @@
 package homework;
 
+import java.sql.Date;
+
 public class MembershipDTO {
 
     private String id;
@@ -15,6 +17,23 @@ public class MembershipDTO {
     private java.sql.Date regidate;
     
     
+    public MembershipDTO() {}
+    
+	public MembershipDTO(String id, String pass, String name, String gender, String birth, String zipcode,
+			String address, String email, String phone, String homephone, Date regidate) {
+		super();
+		this.id = id;
+		this.pass = pass;
+		this.name = name;
+		this.gender = gender;
+		this.birth = birth;
+		this.zipcode = zipcode;
+		this.address = address;
+		this.email = email;
+		this.phone = phone;
+		this.homephone = homephone;
+		this.regidate = regidate;
+	}
 	public String getId() {
 		return id;
 	}

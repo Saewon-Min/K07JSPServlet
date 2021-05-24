@@ -9,6 +9,36 @@
 request.setCharacterEncoding("UTF-8");
 %>
 
+<% 
+/* 
+[선생님코드]
+
+String[] paramArr = new String[20];
+int idx = 0;
+Enumeration<String> forms = request.getParameterNames();
+while(forms.hasMoreElements()){
+	String paramName = (String)forms.nextElements();
+	paramArr[idx++]= request.getParameter(paramName);
+	
+}
+
+MembershpiDTO dto = new MembershipDTO();
+
+dto.setId(paramArr[0]);
+.
+.
+이런식으로 name의 순서대로 값을 받아와서 저장하기
+
+*/
+
+
+
+
+%>
+
+
+
+
 
 <% 
 	// 폼값 받기
@@ -58,7 +88,7 @@ request.setCharacterEncoding("UTF-8");
 	}else if(iResult==-1){
 		JSFunction.alertBack("중복된 아이디가 존재합니다.", out);
 	}else{
-		JSFunction.alertBack("글쓰기에 실패하였습니다.", out);
+		JSFunction.alertBack("회원가입에 실패하였습니다.", out);
 	}
 
 

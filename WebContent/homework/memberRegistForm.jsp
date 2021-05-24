@@ -381,7 +381,7 @@
         <div style="text-align: center; margin-top:10px;">
             <input type="submit" value="회원가입하기">
             <input type="reset" value="작성내용리셋">
-            <input type="button" value="메인으로" onclick="location.href='memberList.jsp';" />
+            <input type="button" value="메인으로" onclick="location.href='memberList.jsp?';" />
         </div>
     </div>
 </div>

@@ -114,7 +114,7 @@ if(boardLists.isEmpty()){
 %>
 	<tr>
 		<td colspan="5" align="center">
-			등록된 게시물이 없습니다.
+			등록된 회원이 없습니다.
 		</td>
 	
 	</tr>
@@ -134,7 +134,7 @@ if(boardLists.isEmpty()){
 		<tr align="center">
 			<td><%=vNum %></td>
 			<td align="left">
-				<a href="memberView.jsp?id=<%=dto.getId() %>&<%=queryStr%>"><%=dto.getId() %></a>
+				<a href="memberView.jsp?id=<%=dto.getId() %>&<%=queryStr%>&pageNum=<%=pageNum%>"><%=dto.getId() %></a>
 			</td>
 			
 			<td align="center" ><%=dto.getName() %></td>

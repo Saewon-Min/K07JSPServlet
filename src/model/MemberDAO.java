@@ -190,6 +190,46 @@ public class MemberDAO {
 	}
 	
 	
+	public Map<String, String> getMemberMap(String id){
+		
+		// 회원정보를 저장할 Map컬렉션 생성
+		Map<String, String> map = new HashMap<String,String>();
+		
+		String query = "SELECT id, pass, name FROM "+
+				" member WHERE id=? ";
+		
+		try {
+			// prepare객체 생성
+			psmt = con.prepareStatement(query);
+			// 인파라미터 설정
+			psmt.setString(1, id);
+			
+			// 쿼리문 실행
+			rs = psmt.executeQuery();
+			
+			// 오라클이 반환해준 ResultSet객체를 통해 결과값이 있는지 확인
+			if(rs.next()) {
+				// 결과가 있다면 Map컬렉션에 회원 정보 저장
+				map.put("id",rs.getString("id")); // 아이디
+				map.put("pass", rs.getString("pass")); // 패스워드
+				map.put("name", rs.getString("name")); // 이름
+				
+			}else {
+				System.out.println("결과셋이 없습니다.");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("getMemberMap오류");
+			e.printStackTrace();
+		}
+		
+		// Map 컬렉션에 저장된 회원 정보
+		return map;
+		
+	}
+	
+	
+	
 }
 
 

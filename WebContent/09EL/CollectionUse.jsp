@@ -17,6 +17,7 @@
 	ArrayList<Object> aList = new ArrayList<Object>();
 	// String 객체, Person객체를 각각 저장
 	aList.add("청해진");
+	// 					 name,age
 	aList.add(new Person("장보고",28));
 	// page영역에 속성 저장
 	pageContext.setAttribute("Ocean", aList);

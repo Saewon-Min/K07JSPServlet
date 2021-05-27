@@ -228,6 +228,18 @@ public class MemberDAO {
 		
 	}
 	
+	// 자원 해제
+	public void close() {
+		try {
+			
+			if(rs!=null) rs.close();
+			if(psmt!=null) psmt.close();
+			if(con!=null) con.close();
+			
+		}catch(Exception e) {
+			System.out.println("Oracle 자원 반납시 예외발생");
+		}
+	}
 	
 	
 }

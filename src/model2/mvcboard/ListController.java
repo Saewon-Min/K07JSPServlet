@@ -62,7 +62,7 @@ public class ListController extends HttpServlet{
 		dao.close();
 		
 		// View에 출력할 페이지 번호를 문자열로 저장
-		String pagingImg = BoardPage.pagingStr(totalCount, pageSize, blockPage, pageNum, "../mvcboard/list.do");
+		String pagingImg = BoardPage.pagingImg(totalCount, pageSize, blockPage, pageNum, "../mvcboard/list.do");
 		
 		map.put("pagingImg", pagingImg); // 페이지 번호 문자열
 		map.put("totalCount", totalCount); // 게시물의 개수

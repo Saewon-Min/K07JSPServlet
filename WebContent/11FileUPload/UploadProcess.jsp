@@ -24,7 +24,7 @@ try{
 	/*
 	위에서 준비한 객체들을 기반으로 MultipartRequest 객체를 생성한다.
 	해당 객체가 정상적으로 생성되면 파일은 서버로 업로드된다.
-	만약 예외가 발생한담면 최대 용량을 초과했거나, 디렉토리 경로가
+	만약 예외가 발생한다면 최대 용량을 초과했거나, 디렉토리 경로가
 	잘못된 경우가 대부분이다.
 	*/
 	MultipartRequest mr = new MultipartRequest(request, saveDirectory, maxPostSize,encoding);

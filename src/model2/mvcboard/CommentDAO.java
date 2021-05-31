@@ -84,12 +84,105 @@ public class CommentDAO extends ConnectionPool{
 	
 	
 	
+	// 댓글의 일련번호를 매개변수로 받아 해당 댓글을 조회하는 메소드
+	public CommentDTO commentView(String idx, String board_idx){
+		CommentDTO dto = new CommentDTO();
+		
+		
+		String query = " select idx, board_idx, name, pass, comments, "
+				+ " to_char(postdate,'yyyy-mm-dd hh:mi') "
+				+ " from mycomment "
+				+ " where idx=? and board_idx=?" ;
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, idx);
+			psmt.setString(2, board_idx);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+
+				dto.setIdx(rs.getString(1));
+				dto.setBoard_idx(rs.getString(2));
+				dto.setName(rs.getString(3));
+				dto.setPass(rs.getString(4));
+				dto.setComments(rs.getString(5).replaceAll("\r\n", "<br/>"));
+				dto.setPostdate(rs.getString(6));
+
+				
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println("댓글 수정 페이지 보기 중 예외발생");
+			e.printStackTrace();
+		
+		}
+		
+		return dto;
+	}
 	
 	
 	
 	
+	// 수정 처리
+	public int commentUpdate(CommentDTO dto) {
+
+		
+		int result = 0;
+		try {
+			String query = " update mycomment set "
+					+ " comments=? "
+					+ " where idx=? and board_idx=? and pass=? ";
+			
+			psmt = con.prepareStatement(query);
+			//psmt.setString(1, dto.getName());
+			//psmt.setString(2, dto.getPostdate());
+			psmt.setString(1, dto.getComments());
+			psmt.setString(2, dto.getIdx());
+			psmt.setString(3, dto.getBoard_idx());
+			psmt.setString(4, dto.getPass());
+
+			System.out.println(dto.getComments());
+			System.out.println(dto.getIdx());
+			System.out.println(dto.getBoard_idx());
+			System.out.println(dto.getPass());
+			result = psmt.executeUpdate();
+			System.out.println(result);
+			
+			
+		} catch (Exception e) {
+			System.out.println("댓글 수정 중 예외발생");
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+		
+	}
 	
 	
+	public int deleteComment(String idx, String board_idx, String pass) {
+		
+		int result = 0;
+		try {
+			String query= " delete from mycomment where idx=? and board_idx=? and pass=?";
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, idx);
+			psmt.setString(2, board_idx);
+			psmt.setString(3, pass);
+			result = psmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("게시물 삭제 중 예외발생");
+			e.printStackTrace();
+		}
+		
+		return result;
+		
+		
+		
+		
+	}
 	
 	
 	

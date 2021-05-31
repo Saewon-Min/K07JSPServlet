@@ -1,13 +1,16 @@
 package model2.mvcboard;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import fileupload.FileUtil;
 import utils.JSFunction;
 
 /*
@@ -92,7 +95,16 @@ public class CommentController extends HttpServlet{
 	
 	private void commentEdit(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException{
-			
+
+		String idx = req.getParameter("idx");
+		String board_idx = req.getParameter("board_idx");
+		CommentDAO dao = new CommentDAO();
+		CommentDTO dto = dao.commentView(idx,board_idx);
+		
+		// 하나의 레코드를 저장한 DTO객체를 request영역에 저장한 후 View로 포워드
+		req.setAttribute("dto", dto);
+		req.getRequestDispatcher("/14MVCBoard/EditComment.jsp").forward(req, resp);
+		
 			
 	}
 		
@@ -100,18 +112,73 @@ public class CommentController extends HttpServlet{
 	private void commentEditAction(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException{
 		
+		String idx = req.getParameter("idx");
+		String board_idx = req.getParameter("board_idx");
+		String pass = req.getParameter("pass");
+
+		String name = req.getParameter("name");
+		String postdate = req.getParameter("postdate");
+		String comments = req.getParameter("comments");
 		
+		CommentDTO dto = new CommentDTO();		
+		dto.setComments(comments);
+		dto.setBoard_idx(board_idx);
+		dto.setIdx(idx);
+		dto.setPass(pass);
+
+		
+		CommentDAO dao = new CommentDAO();
+		int result = dao.commentUpdate(dto);
+		dao.close();
+		if(result==1) {
+			JSFunction.alertLocation(resp, "수정되었습니다.", "./commentEdit.comm");	
+			
+		}else {
+			JSFunction.alertBack(resp, "댓글 수정 중 오류가 발생했습니다.");
+		}
+		
+
 	}
 	
 		
 	private void commentDelete(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException{
+		String idx = req.getParameter("idx");
+		String board_idx = req.getParameter("board_idx");
+		CommentDAO dao = new CommentDAO();
+		CommentDTO dto = dao.commentView(idx,board_idx);
 		
+		req.setAttribute("dto", dto);
+		req.getRequestDispatcher("/14MVCBoard/DeleteComment.jsp").forward(req, resp);
 		
 	}
 	
 	private void commentDeleteAction(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException{
+		
+		String idx = req.getParameter("idx");
+		String board_idx = req.getParameter("board_idx");
+
+		String pass = req.getParameter("pass");
+	
+
+		CommentDAO dao =  new CommentDAO();
+		
+		
+		// 첨부된 파일이 있다면 삭제하기 위해 기존 게시물을 가져온다.
+		CommentDTO dto = dao.commentView(idx,board_idx);
+		// 기존 게시물을 삭제한다.
+		int result = dao.deleteComment(idx,board_idx,pass);
+		dao.close();
+		
+
+		if(result==1) {
+			JSFunction.alertLocation(resp, "삭제되었습니다.", "./commentDelete.comm");				
+		}	
+		else {
+			JSFunction.alertBack(resp, "댓글 삭제를 실패했습니다.");
+		}
+		
 		
 		
 	}

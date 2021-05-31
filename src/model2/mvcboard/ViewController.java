@@ -1,6 +1,7 @@
 package model2.mvcboard;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +28,17 @@ public class ViewController extends HttpServlet{
 		dto.setContent(dto.getContent().replaceAll("\r\n", "<br/>"));
 		// 리퀘스트 영역에 저장
 		req.setAttribute("dto", dto);
-		// View.jsp로 포워드(페이지전달)
+		
+		
+		// 댓글 기능(목록) 추가
+		CommentDAO dao2 = new CommentDAO();
+		
+		// 현재 조회하는 게시물의 일련번호를 통해 댓글 목록을 가져온다.
+		List<CommentDTO> comments = dao2.commentSelectList(idx);
+		
+		req.setAttribute("comments", comments);
+		dao2.close();
+		
 		req.getRequestDispatcher("/14MVCBoard/View.jsp").forward(req, resp);
 		
 		

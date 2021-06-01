@@ -23,11 +23,14 @@
 			f.comments.focus();
 			return false;
 		}
+		if(f.pass.value==""){
+			alert("비밀번호를 입력하세요");
+			f.pass.focus();
+			return false;
+		}
 	}
 	
-	function close() {
-		window.close();
-	}
+
 	
 </script>
 </head>
@@ -49,7 +52,7 @@
 		<td>
 			<input type="text" name="name" style="width:150px;" value="${dto.name }" />
 		</td>
-	
+
 		<td>작성일</td>
 		<td>
 			<input type="text" name="postdate" style="width:90%;" value="${dto.postdate }" />
@@ -57,19 +60,18 @@
 	</tr>
 	<tr>
 		<td>댓글</td>
-		<td colspan="3">
+		<td colspan="6">
 			<textarea name="comments" style="width:90%;height:100px;">${dto.comments }</textarea>
 		</td>
 	</tr>
 	<tr>
-		<td colspan="4" align="center">
+		<td colspan="6" align="center">
 			<button type="submit">작성완료</button>
 			<button type="reset">RESET</button>
-			<button onclick="close();">
-				댓글 리스트바로가기
-			</button>
+
 		</td>
 	</tr>
+	
 </table>	
 </form>
 </body>

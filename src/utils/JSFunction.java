@@ -77,5 +77,25 @@ public class JSFunction {
 	}
 	
 	
+	public static void popupclose(HttpServletResponse resp, String msg) {
+		String str = "";
+		try {
+			resp.setContentType("text/html;charset=UTF-8");
+			PrintWriter writer = resp.getWriter();
+			str =  "<script>"
+					+ "	alert('"+msg+"');  "
+					+ "	opener.parent.location.reload(); "
+					+ "	window.close();  "
+					+ "</script>"; 
+			writer.println(str); 
+			
+		}catch(Exception e) {}
+		
+		
+		
+		
+	}
+	
+	
 	
 }

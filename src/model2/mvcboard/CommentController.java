@@ -98,9 +98,11 @@ public class CommentController extends HttpServlet{
 
 		String idx = req.getParameter("idx");
 		String board_idx = req.getParameter("board_idx");
+
+
 		CommentDAO dao = new CommentDAO();
 		CommentDTO dto = dao.commentView(idx,board_idx);
-		
+
 		// 하나의 레코드를 저장한 DTO객체를 request영역에 저장한 후 View로 포워드
 		req.setAttribute("dto", dto);
 		req.getRequestDispatcher("/14MVCBoard/EditComment.jsp").forward(req, resp);
@@ -114,11 +116,13 @@ public class CommentController extends HttpServlet{
 		
 		String idx = req.getParameter("idx");
 		String board_idx = req.getParameter("board_idx");
-		String pass = req.getParameter("pass");
-
+		String pass= req.getParameter("pass");
 		String name = req.getParameter("name");
 		String postdate = req.getParameter("postdate");
 		String comments = req.getParameter("comments");
+		
+
+		
 		
 		CommentDTO dto = new CommentDTO();		
 		dto.setComments(comments);
@@ -130,11 +134,13 @@ public class CommentController extends HttpServlet{
 		CommentDAO dao = new CommentDAO();
 		int result = dao.commentUpdate(dto);
 		dao.close();
+
 		if(result==1) {
-			JSFunction.alertLocation(resp, "수정되었습니다.", "./commentEdit.comm");	
+			JSFunction.popupclose(resp,"댓글이 수정되었습니다.");	
 			
 		}else {
 			JSFunction.alertBack(resp, "댓글 수정 중 오류가 발생했습니다.");
+			
 		}
 		
 
@@ -173,7 +179,7 @@ public class CommentController extends HttpServlet{
 		
 
 		if(result==1) {
-			JSFunction.alertLocation(resp, "삭제되었습니다.", "./commentDelete.comm");				
+			JSFunction.popupclose(resp,"댓글이 삭제되었습니다.");			
 		}	
 		else {
 			JSFunction.alertBack(resp, "댓글 삭제를 실패했습니다.");

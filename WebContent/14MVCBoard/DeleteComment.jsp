@@ -49,7 +49,7 @@
 			<textarea name="comments" style="width:90%;height:100px;">${dto.comments }</textarea>
 		</td>
 	</tr>
-	<tr>
+	<tr>    
 		<td >
 			<button type="submit">삭제하기</button>
 		</td>

@@ -143,13 +143,8 @@ public class CommentDAO extends ConnectionPool{
 			psmt.setString(3, dto.getBoard_idx());
 			psmt.setString(4, dto.getPass());
 
-			System.out.println(dto.getComments());
-			System.out.println(dto.getIdx());
-			System.out.println(dto.getBoard_idx());
-			System.out.println(dto.getPass());
 			result = psmt.executeUpdate();
-			System.out.println(result);
-			
+	
 			
 		} catch (Exception e) {
 			System.out.println("댓글 수정 중 예외발생");
@@ -183,6 +178,38 @@ public class CommentDAO extends ConnectionPool{
 		
 		
 	}
+	
+	
+	
+	public boolean confirmPassword(String pass, String idx) {
+		
+		boolean isCorr = true;
+		try {
+			// 일련번호와 패스워드가 일치하는 게시물이 있는지 확인
+			String sql = " select count(*) from mycomment where pass=? and idx=? ";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, pass);
+			psmt.setString(2, idx);
+			rs = psmt.executeQuery();
+			rs.next();
+			if(rs.getInt(1)==0) {
+				// 패스워드가 일치하는 게시물이 없으므로  false
+				isCorr = false;
+			}
+			
+			
+		} catch (Exception e) {
+			// 예외가 발생하여 확인이 불가하므로 false
+			isCorr = false;
+			e.printStackTrace();
+		}
+		
+		return isCorr;
+		
+		
+		
+	}
+	
 	
 	
 	

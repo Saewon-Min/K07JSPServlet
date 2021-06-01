@@ -23,3 +23,30 @@ ${resultValue }
 	<li><a href="../13Servlet/login.one">로그인</li>
 	<li><a href="../13Servlet/freeboard.one">자유게시판</li>
 </ul>
+
+
+
+파일명 : HelloServlet
+<h2>web.xml에서 매핑 후 JSP에서 출력하기</h2>
+<p>
+	<strong><%=request.getAttribute("message") %></strong>
+	<br/>
+	<a href="./HelloServlet.do">바로가기</a>
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

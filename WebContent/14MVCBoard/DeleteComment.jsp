@@ -31,21 +31,20 @@
 
 	<input type="hid den" name="idx" value=${dto.idx } /><!-- 댓글 일련번호 -->	
 	<input type="hid den" name="board_idx" value=${dto.board_idx } />
-	<input type="hid den" name="pass" value=${dto.pass } />
+	<%-- <input type="hid den" name="pass" value=${dto.pass } /> --%>
 
 <table border="1" width="90%">
 	<tr>
 		<td>
 		작성자: <input type="text" name="name" style="width:150px;" value="${dto.name }" />
 		</td>
-	</tr>
-	<tr>
+	
 		<td>
-		작성일: <input type="text" name="postdate" style="width:90%;" value="${dto.postdate }" />
+		비밀번호: <input type="text" name="pass" style="width:90%;" value="" />
 		</td>
 	</tr>
 	<tr>
-		<td>
+		<td colspan="2">
 			<textarea name="comments" style="width:90%;height:100px;">${dto.comments }</textarea>
 		</td>
 	</tr>

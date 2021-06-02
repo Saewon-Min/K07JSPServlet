@@ -132,17 +132,24 @@ public class CommentController extends HttpServlet{
 
 		
 		CommentDAO dao = new CommentDAO();
-		int result = dao.commentUpdate(dto);
-		dao.close();
-
-		if(result==1) {
-			JSFunction.popupclose(resp,"댓글이 수정되었습니다.");	
+		boolean confirmPass = dao.confirmPassword(pass, idx);
+		//dao.close();
+		if(confirmPass == true) {
+			
+			int result = dao.commentUpdate(dto);
+			dao.close();
+			
+			if(result==1) {
+				JSFunction.alertOpenerReloadClose(resp,"댓글이 수정되었습니다.");	
+				
+			}else {
+				JSFunction.alertBack(resp, "댓글 수정 중 오류가 발생했습니다.");
+				
+			}
 			
 		}else {
-			JSFunction.alertBack(resp, "댓글 수정 중 오류가 발생했습니다.");
-			
+			JSFunction.alertBack(resp, "비밀번호 검증에 실패했습니다.");
 		}
-		
 
 	}
 	
@@ -170,20 +177,27 @@ public class CommentController extends HttpServlet{
 
 		CommentDAO dao =  new CommentDAO();
 		
-		
-		// 첨부된 파일이 있다면 삭제하기 위해 기존 게시물을 가져온다.
-		CommentDTO dto = dao.commentView(idx,board_idx);
-		// 기존 게시물을 삭제한다.
-		int result = dao.deleteComment(idx,board_idx,pass);
-		dao.close();
-		
-
-		if(result==1) {
-			JSFunction.popupclose(resp,"댓글이 삭제되었습니다.");			
-		}	
-		else {
-			JSFunction.alertBack(resp, "댓글 삭제를 실패했습니다.");
+		boolean confirmPass = dao.confirmPassword(pass, idx);
+		if(confirmPass == true) {
+			
+			CommentDTO dto = dao.commentView(idx,board_idx);
+			
+			int result = dao.deleteComment(idx,board_idx,pass);
+			dao.close();
+			
+			
+			if(result==1) {
+				JSFunction.alertOpenerReloadClose(resp,"댓글이 삭제되었습니다.");			
+			}	
+			else {
+				JSFunction.alertBack(resp, "댓글 삭제를 실패했습니다.");
+			}
+		}else {
+			JSFunction.alertBack(resp, "비밀번호 검증에 실패했습니다.");
 		}
+		
+		
+		
 		
 		
 		

@@ -77,11 +77,15 @@ public class JSFunction {
 	}
 	
 	
-	public static void popupclose(HttpServletResponse resp, String msg) {
+	public static void alertOpenerReloadClose(HttpServletResponse resp, String msg) {
 		String str = "";
 		try {
 			resp.setContentType("text/html;charset=UTF-8");
 			PrintWriter writer = resp.getWriter();
+			/*
+			reload() : JS에서 F5를 누른것처럼 페이지에 대한 새로고침을
+					해주는 함수
+			 */
 			str =  "<script>"
 					+ "	alert('"+msg+"');  "
 					+ "	opener.parent.location.reload(); "

@@ -44,7 +44,7 @@
 
 	<input type="hid den" name="idx" value=${dto.idx } /><!-- 댓글 일련번호 -->	
 	<input type="hid den" name="board_idx" value=${dto.board_idx } />
-	<input type="hid den" name="pass" value=${dto.pass } />
+	<%-- <input type="hid den" name="pass" value=${dto.pass } /> --%>
 
 <table border="1" width="90%">
 	<tr>
@@ -53,9 +53,9 @@
 			<input type="text" name="name" style="width:150px;" value="${dto.name }" />
 		</td>
 
-		<td>작성일</td>
+		<td>비밀번호</td>
 		<td>
-			<input type="text" name="postdate" style="width:90%;" value="${dto.postdate }" />
+			<input type="text" name="pass" style="width:90%;" value="" />
 		</td>
 	</tr>
 	<tr>

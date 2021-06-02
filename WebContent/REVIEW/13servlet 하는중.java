@@ -109,6 +109,7 @@ public class MemberAuth extends HttpServlet {
 	/*
 	서블릿 수명주기 메소드에서 서블릿 객체 생성시 최초로 한번만
 	호출되는 메소드로, 여기서는 db연결을 담당한다.
+	일반적으로 서블릿을 초기화 하는 역할을 한다.
 	*/
 	@Override
 	public void init() throws ServletException{
@@ -121,6 +122,11 @@ public class MemberAuth extends HttpServlet {
 		
 	}
 	
+	/*
+	클라이언트의 요청을 처리하기 위해 호출된다. 전송방식에 상관없이
+	호출되며 get 혹은 post에 따라 doGet(),doPost()를 호출하는
+	역할을 한다.
+	*/
 	@Override
 	public void service(HttpServletRequest req, HttpServletResponse resp)
 		throws ServletException, IOException{
@@ -134,19 +140,31 @@ public class MemberAuth extends HttpServlet {
 		String pass = req.getParameter("pass");
 		
 		// DAO의 메소드를 통해 회원인증 처리를 한다.
-		MemberDTO memberDTO = dao.getMemberDTO(id,pass0;
+		MemberDTO memberDTO = dao.getMemberDTO(id,pass);
 		
 		String memberName = memberDTO.getName();
 		if(memberName != null){
+			req.setAttribute("authMessage",memberName+" 회원님 안녕하세요");
 			
-		
-			
-			
-			
+		}else{
+			if(admin_id.equals(id)
+				req.setAttribute("authMessage",admin_id+"최고관리자 입니다.");
+			else	
+				req.setAttribute("authMessage","귀하는 회원이 아닙니다.");
 		}
+		req.getRequestDispatcher("/13Servlet/MemberAuth.jsp").forward(req,resp);
 	
+	}
 	
-	
+	/*
+	서블릿이 새롭게 컴파일 되거나, 서버가 종료될때 호출된다.
+	이때 서블릿 객체는 메모리에서 소멸된다.
+	*/
+	@Override
+	public void destroy(){
+		System.out.println("destroy() 호출됨");
+		dao.close();
+	}
 	
 }
 

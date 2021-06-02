@@ -6,40 +6,17 @@
 <%@page import="model1.board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="./inc/boardHead.jsp" />
-
-<%
-BoardDAO dao = new BoardDAO(application);
-
-Map<String, Object> param = new HashMap<String, Object>();
-
-String keyField = request.getParameter("keyField");
-String keyString = request.getParameter("keyString");
-
-if(keyString != null){
-	param.put("keyField", keyField);
-	param.put("keyString", keyString);
-	
-}
-
-int totalCount = dao.selectCount(param);
-
-List<BoardDTO> boardLists = dao.selectList(param);
-
-dao.close();
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 
 
-
-
-
-%>
-
-
-
-
-
-
-
+<style >a{text-decoration: none;}</style>
+</head>
 <body>
 <div class="container">
 	<jsp:include page="./inc/boardTop.jsp" />
@@ -91,42 +68,44 @@ dao.close();
 				</tr>
 				</thead>				
 				<tbody>
-								 
-				<%  
-				if(boardLists.isEmpty()){
-					%>
+
+			<c:choose>
+				<c:when test="${empty boardLists }">
 						<tr>
 							<td colspan="5" align="center">
 								등록된 게시물이 없습니다.
 							</td>
 						
 						</tr>
-					<% 
-					// 컬렉션에 저장된 데이터가 있다면 해당 내용을 반복하여 출력한다.
-					}else{
-						int vNum = 0; // 목록의 가상 번호
-						int countNum = 0; 
-						// List컬렉션에 저장된 개수만큼 반복하기 위해 확장 for문 사용
-						for(BoardDTO dto : boardLists){
-							// 게시물의 카운트 개수를 통해 가상번호 부여
-							vNum = totalCount--;
-					%>
-							<!-- getter()를 통해 출력한다. -->
-							<tr align="center">
-								<td><%=vNum %></td>
-								<td align="left">
-									<a href="BoardView.jsp?num=<%=dto.getNum() %>"><%=dto.getTitle() %></a>
-								</td>
-								<td align="center" ><%=dto.getId() %></td>
-								<td align="center" ><%=dto.getVisitcount() %></td>
-								<td align="center" ><%=dto.getPostdate() %></td>
-							</tr>
-							
-					<% 		
-						}
-					}
-					%>
-				
+		</c:when>
+		<c:otherwise>
+			<!-- 게시물이 있는 경우 확장 for문 형태의 forEach태그 사용 -->
+			<c:forEach items="${boardLists }" var="row" varStatus="loop">
+	
+			<tr align="center">
+				<td>
+					${map.totalCount - (((map.pageNum-1) * map.pageSize)
+						+ loop.index) }
+				</td>
+				<td align="left">
+					<a href="../mvcboard/view.mvc?idx=${row.idx }">${row.title }</a>
+				</td>
+				<td>${row.name }</td>
+				<td>${row.postdate }</td>
+				<td>${row.visitcount }</td>
+				<td>
+				<!-- 첨부된 파일이 있는경우에만 다운로드 링크 출력됨 -->
+				<c:if test="${not empty row.ofile }">
+					<!-- 파일 다운로드 시 다운로드 횟수를 증가시켜야 하므로
+						게시물의 일련번호가 필요함 -->
+					<a href="../mvcboard/download.?ofile=${row.ofile 
+						}&sfile=${row.sfile }&idx=${row.idx }">[Down]</a>
+				</c:if>
+				</td>
+			</tr>
+			</c:forEach>
+		</c:otherwise>
+		</c:choose>
 				
 				</tbody>
 				
@@ -152,15 +131,8 @@ dao.close();
 				<div class="col">
 					<!-- 페이지번호 부분 -->
 					<ul class="pagination justify-content-center">
-						<li class="page-item"><a href="#" class="page-link"><i class="fas fa-angle-double-left"></i></a></li>
-						<li class="page-item"><a href="#" class="page-link"><i class="fas fa-angle-left"></i></a></li>
-						<li class="page-item"><a href="#" class="page-link">1</a></li>		
-						<li class="page-item active"><a href="#" class="page-link">2</a></li>
-						<li class="page-item"><a href="#" class="page-link">3</a></li>
-						<li class="page-item"><a href="#" class="page-link">4</a></li>		
-						<li class="page-item"><a href="#" class="page-link">5</a></li>
-						<li class="page-item"><a href="#" class="page-link"><i class="fas fa-angle-right"></i></a></li>
-						<li class="page-item"><a href="#" class="page-link"><i class="fas fa-angle-double-right"></i></a></li>
+						<li class="page-item">${map.pagingImg }</li>
+						
 					</ul>
 				</div>				
 			</div>		
@@ -168,6 +140,7 @@ dao.close();
 	</div>
 	<div class="row border border-dark border-bottom-0 border-right-0 border-left-0"></div>
 	<jsp:include page="./inc/boardBottom.jsp" />
+
 </div>
 </body>
 </html>

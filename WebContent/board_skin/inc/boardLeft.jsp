@@ -6,13 +6,8 @@
 		웹사이트제작
 	</div>
 	<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-		<a class="nav-link active" id="v-pills-home-tab"  
-			href="../08Board1/BoardList.jsp" role="tab" aria-controls="v-pills-home" aria-selected="true">자유게시판</a>
-			
-		<a class="nav-link" id="v-pills-profile-tab" 
-			href="../DataRoom/DataList" role="tab" 
-			aria-controls="v-pills-profile" 
-			aria-selected="false">자료실</a>
+<a class="nav-link" href="../mvcboard/list.mvc">MVC게시판 목록 바로가기</a>
+				<a class="nav-link" href="../board_skin/BoardList.jsp" >BoardDB연결게시판(Board_skin)</a>
 			
 		<a class="nav-link" id="v-pills-messages-tab" 
 			href="javascript:alert('준비중임');" role="tab" aria-controls="v-pills-messages" aria-selected="false">방명록</a>				

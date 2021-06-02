@@ -131,23 +131,3 @@ function isDelete(){
 </div>
 </body>
 </html>
-
-<!-- 
-	<i class='fas fa-edit' style='font-size:20px'></i>
-	<i class='fa fa-cogs' style='font-size:20px'></i>
-	<i class='fas fa-sign-in-alt' style='font-size:20px'></i>
-	<i class='fas fa-sign-out-alt' style='font-size:20px'></i>
-	<i class='far fa-edit' style='font-size:20px'></i>
-	<i class='fas fa-id-card-alt' style='font-size:20px'></i>
-	<i class='fas fa-id-card' style='font-size:20px'></i>
-	<i class='fas fa-id-card' style='font-size:20px'></i>
-	<i class='fas fa-pen' style='font-size:20px'></i>
-	<i class='fas fa-pen-alt' style='font-size:20px'></i>
-	<i class='fas fa-pen-fancy' style='font-size:20px'></i>
-	<i class='fas fa-pen-nib' style='font-size:20px'></i>
-	<i class='fas fa-pen-square' style='font-size:20px'></i>
-	<i class='fas fa-pencil-alt' style='font-size:20px'></i>
-	<i class='fas fa-pencil-ruler' style='font-size:20px'></i>
-	<i class='fa fa-cog' style='font-size:20px'></i>
-	아~~~~힘들다...ㅋ
- -->

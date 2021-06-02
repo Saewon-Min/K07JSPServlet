@@ -26,11 +26,13 @@
 				<a href="../08Board/List.jsp">회원제게시판2[PageO]</a>
 				
 				&nbsp;&nbsp;&nbsp;
-				<a href="../board_skin/BoardList.jsp">연습 페이지</a>
+				<a href="../board_skin/BoardList.jsp">board_skin</a>
+				
+				&nbsp;&nbsp;&nbsp;
+				<a href="../14MVCBoard/Default.jsp">MVCBoard</a>
 				
 				&nbsp;&nbsp;&nbsp;
 				<a href="../DataRoom/DataList">자료실(Model2)</a>
-				
 				
 			
 			</td>

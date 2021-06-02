@@ -2,14 +2,14 @@
     pageEncoding="UTF-8"%>
 <div class="row mb-5 mt-3">		 
 	<div class="col-2">
-		<h3>겸이아빠&trade;</h3>
+		<h3>세원&trade;</h3>
 	</div>
 	<div class="col-10 text-center">
-		Email : nakjasabal@naver.com&nbsp;&nbsp;
-		Mobile : 010-7906-3600&nbsp;&nbsp;
-		Address : 서울시 금천구 가산동 426-5 월드메르디앙2차 1강의실
+		Email : minsw626@naver.com&nbsp;&nbsp;
+		Mobile : 010-1111-1111&nbsp;&nbsp;
+		Address : 서울시 양천구
 		<br/>
-		copyright &copy; 2019 한국소프트웨어인재개발원.
+		copyright &copy; 2021-06-**
 		All right reserved.
 	</div>
 </div>

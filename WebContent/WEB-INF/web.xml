@@ -135,7 +135,8 @@
   	<url-pattern>/13Servlet/MemberAuth.mvc</url-pattern>
   </servlet-mapping>
   
-  
+  <!-- 모델2 방식의 파일첨부형 게시판 만들기 -->
+  <!-- 목록 매핑 -->
   <servlet>
   	<servlet-name>MVCBoardList</servlet-name>
   	<servlet-class>model2.mvcboard.ListController</servlet-class>
@@ -145,7 +146,7 @@
   	<url-pattern>/mvcboard/list.do</url-pattern>
   </servlet-mapping>
   
-  
+  <!-- 글쓰기매핑 -->
    <servlet>
   	<servlet-name>MVCBoardWrite</servlet-name>
   	<servlet-class>model2.mvcboard.WriteController</servlet-class>
@@ -154,6 +155,10 @@
   	<servlet-name>MVCBoardWrite</servlet-name>
   	<url-pattern>/mvcboard/write.do</url-pattern>
   </servlet-mapping>
+  <!-- 내용 보기 매핑 없음 -->
+  <!-- 글 수정하기 매핑 없음 -->
+  <!-- 글 삭제하기 매핑 없음 -->
+  <!-- 답변 글쓰기 매핑 없음 -->
   
   
   <!-- 파일 업로드 최대 용량 : 1MB -->

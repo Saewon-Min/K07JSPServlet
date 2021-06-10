@@ -9,6 +9,7 @@ String user_pw = request.getParameter("user_pw");
 
 // 아이디 저장 체크박스를 체크한 경우 전송되는 폼값
 String save_check = request.getParameter("save_check");
+System.out.println(save_check);
 
 // 문자열을 통해 인증처리 한다.
 // 로그인 성공하는 경우
